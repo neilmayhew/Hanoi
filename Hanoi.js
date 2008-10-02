@@ -125,17 +125,23 @@ function makeStacks()
 	stacks = [[], [], []]
 	disk3 = document.getElementById("disk3");
 	stacks[0].push(disk3);
+	disk3.style.position = "absolute";
 	disk3.style.width = 100 + "px";
+	disk3.style.height = 19 + "px";
 	disk3.style.left = Math.round(poles_mid[0] - parseInt(disk3.style.width) / 2) + "px";
 	disk3.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
 	disk2 = document.getElementById("disk2");
 	stacks[0].push(disk2);
+	disk2.style.position = "absolute";
 	disk2.style.width = 90 + "px";
+	disk2.style.height = 19 + "px";
 	disk2.style.left = Math.round(poles_mid[0] - parseInt(disk2.style.width) / 2) + "px";
 	disk2.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
 	disk1 = document.getElementById("disk1");
 	stacks[0].push(disk1);
+	disk1.style.position = "absolute";
 	disk1.style.width = 80 + "px";
+	disk1.style.height = 19 + "px";
 	disk1.style.left = Math.round(poles_mid[0] - parseInt(disk1.style.width) / 2) + "px";
 	disk1.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
 }

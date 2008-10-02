@@ -96,8 +96,9 @@ function moveStack(n, from, to)
 	if (n - 1 > 0) moveStack(n - 1, other, to);
 }
 
-function setup()
+function start()
 {
+	makeStacks();
 	moveStack(stacks[0].length, 0, 2);
 
 	nextLeg();
@@ -118,15 +119,8 @@ function stop()
 	pause();
 }
 
-function start()
+function makeStacks()
 {
-	poles_mid = [0, 0, 0]
-	poles_mid[0] = 150;
-	poles_mid[1] = 350;
-	poles_mid[2] = 550;
-	poles_top = 150;
-	poles_bot = 320;
-
 	// Todo: any number of disks -- use a loop
 	stacks = [[], [], []]
 	disk3 = document.getElementById("disk3");
@@ -144,6 +138,16 @@ function start()
 	disk1.style.width = 80 + "px";
 	disk1.style.left = Math.round(poles_mid[0] - parseInt(disk1.style.width) / 2) + "px";
 	disk1.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-
-	setup();
 }
+function init()
+{
+	poles_mid = [0, 0, 0]
+	poles_mid[0] = 150;
+	poles_mid[1] = 350;
+	poles_mid[2] = 550;
+	poles_top = 150;
+	poles_bot = 320;
+
+	makeStacks();
+}
+window.onload = init;

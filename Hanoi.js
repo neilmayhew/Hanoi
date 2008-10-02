@@ -24,7 +24,7 @@ function animate()
 		nextLeg();
 }
 
-legs = new Array;
+legs = [];
 function nextLeg()
 {
 	if (legs.length == 0)
@@ -43,7 +43,6 @@ function nextLeg()
 	leg.speed_y = (leg.end_y - leg.start_y) / (leg.end_time - leg.start_time);
 }
 
-moves = new Array;
 function nextMove()
 {
 	if (moves.length == 0)
@@ -98,6 +97,9 @@ function moveStack(n, from, to)
 
 function start()
 {
+	moves = []
+	legs = []
+
 	makeStacks();
 	moveStack(stacks[0].length, 0, 2);
 
@@ -122,29 +124,51 @@ function stop()
 function makeStacks()
 {
 	// Todo: any number of disks -- use a loop
-	stacks = [[], [], []]
+
+	body = document.getElementById("body");
+	disk1 = document.getElementById("disk1");
+	disk2 = document.getElementById("disk2");
 	disk3 = document.getElementById("disk3");
+	if (disk1) body.removeChild(disk1);
+	if (disk2) body.removeChild(disk2);
+	if (disk3) body.removeChild(disk3);
+
+	stacks = [[], [], []]
+
+	disk3 = document.createElement("img");
+	body.appendChild(disk3);
 	stacks[0].push(disk3);
+	disk3.id = "disk3";
+	disk3.src = "disk.jpg";
 	disk3.style.position = "absolute";
 	disk3.style.width = 100 + "px";
 	disk3.style.height = 19 + "px";
 	disk3.style.left = Math.round(poles_mid[0] - parseInt(disk3.style.width) / 2) + "px";
 	disk3.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-	disk2 = document.getElementById("disk2");
+
+	disk2 = document.createElement("img");
+	body.appendChild(disk2);
 	stacks[0].push(disk2);
+	disk2.id = "disk2";
+	disk2.src = "disk.jpg";
 	disk2.style.position = "absolute";
 	disk2.style.width = 90 + "px";
 	disk2.style.height = 19 + "px";
 	disk2.style.left = Math.round(poles_mid[0] - parseInt(disk2.style.width) / 2) + "px";
 	disk2.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-	disk1 = document.getElementById("disk1");
+
+	disk1 = document.createElement("img");
+	body.appendChild(disk1);
 	stacks[0].push(disk1);
+	disk1.id = "disk1";
+	disk1.src = "disk.jpg";
 	disk1.style.position = "absolute";
 	disk1.style.width = 80 + "px";
 	disk1.style.height = 19 + "px";
 	disk1.style.left = Math.round(poles_mid[0] - parseInt(disk1.style.width) / 2) + "px";
 	disk1.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
 }
+
 function init()
 {
 	poles_mid = [0, 0, 0]

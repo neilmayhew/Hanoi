@@ -107,14 +107,16 @@ function start()
 	resume();
 }
 
-timerID = 0;
 function resume()
 {
-	timerID = setInterval(animate, 50);
+	if (!timerID)
+		timerID = setInterval(animate, 50);
 }
 function pause()
 {
-	clearInterval(timerID);
+	if (timerID)
+		clearInterval(timerID);
+	timerID = 0;
 }
 function stop()
 {
@@ -179,5 +181,8 @@ function init()
 	poles_bot = 320;
 
 	makeStacks();
+
+	timerID = 0;
 }
+
 window.onload = init;

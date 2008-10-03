@@ -127,17 +127,21 @@ function makeStacks()
 {
 	// Todo: any number of disks -- use a loop
 
-	var body = document.getElementById("body");
-	var disk1 = document.getElementById("disk1");
-	var disk2 = document.getElementById("disk2");
-	var disk3 = document.getElementById("disk3");
-	if (disk1) body.removeChild(disk1);
-	if (disk2) body.removeChild(disk2);
-	if (disk3) body.removeChild(disk3);
+	for (var j in stacks)
+	{
+		var stack = stacks[j];
+		for (var i in stack)
+		{
+			var disk = stack[i];
+			disk.parentNode.removeChild(disk);
+		}
+	}
 
 	stacks = [[], [], []]
 
 	var width = 100;
+
+	var body = document.getElementById("body");
 
 	disk3 = document.createElement("img");
 	body.appendChild(disk3);
@@ -226,10 +230,11 @@ function makePoles()
 
 function init()
 {
+	stacks = []
+	timerID = 0;
+
 	makePoles();
 	makeStacks();
-
-	timerID = 0;
 }
 
 window.onload = init;

@@ -127,10 +127,10 @@ function makeStacks()
 {
 	// Todo: any number of disks -- use a loop
 
-	body = document.getElementById("body");
-	disk1 = document.getElementById("disk1");
-	disk2 = document.getElementById("disk2");
-	disk3 = document.getElementById("disk3");
+	var body = document.getElementById("body");
+	var disk1 = document.getElementById("disk1");
+	var disk2 = document.getElementById("disk2");
+	var disk3 = document.getElementById("disk3");
 	if (disk1) body.removeChild(disk1);
 	if (disk2) body.removeChild(disk2);
 	if (disk3) body.removeChild(disk3);
@@ -171,15 +171,57 @@ function makeStacks()
 	disk1.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
 }
 
+function makePoles()
+{
+	poles_mid = []
+	poles_mid.push(150);
+	poles_mid.push(350);
+	poles_mid.push(550);
+	poles_top = 150;
+	poles_bot = poles_top + 170;
+
+	var body = document.getElementById("body");
+
+	var pole1 = document.createElement("img");
+	pole1.style.position = "absolute";
+	pole1.style.width = "20px";
+	pole1.style.height = poles_bot - poles_top + "px";
+	pole1.style.left = poles_mid[0] - 10 + "px";
+	pole1.style.top = poles_top + "px";
+	pole1.src = "disk.jpg";
+	body.appendChild(pole1);
+
+	var pole2 = document.createElement("img");
+	pole2.style.position = "absolute";
+	pole2.style.width = "20px";
+	pole2.style.height = poles_bot - poles_top + "px";
+	pole2.style.left = poles_mid[1] - 10 + "px";
+	pole2.style.top = poles_top + "px";
+	pole2.src = "disk.jpg";
+	body.appendChild(pole2);
+
+	var pole3 = document.createElement("img");
+	pole3.style.position = "absolute";
+	pole3.style.width = "20px";
+	pole3.style.height = poles_bot - poles_top + "px";
+	pole3.style.left = poles_mid[2] - 10 + "px";
+	pole3.style.top = poles_top + "px";
+	pole3.src = "disk.jpg";
+	body.appendChild(pole3);
+
+	var base = document.createElement("img");
+	base.style.position = "absolute";
+	base.style.height = "20px";
+	base.style.left = poles_mid[0] - 70 + "px";
+	base.style.width = poles_mid[2] - poles_mid[0] + 140 + "px";
+	base.style.top = poles_bot + "px";
+	base.src = "disk.jpg";
+	body.appendChild(base);
+}
+
 function init()
 {
-	poles_mid = [0, 0, 0]
-	poles_mid[0] = 150;
-	poles_mid[1] = 350;
-	poles_mid[2] = 550;
-	poles_top = 150;
-	poles_bot = 320;
-
+	makePoles();
 	makeStacks();
 
 	timerID = 0;

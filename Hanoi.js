@@ -56,11 +56,14 @@ function nextLeg()
 function nextMove()
 {
 	if (moves.length == 0)
+	{
+		window.status = "Finished";
 		return;
-
-	var move = moves.shift();
+	}
 
 	window.status = moves.length + " moves remaining";
+
+	var move = moves.shift();
 
 	var disk = stacks[move.from].pop();
 	stacks[move.to].push(disk);
@@ -107,7 +110,7 @@ function moveStack(n, from, to)
 	if (n - 1 > 0) moveStack(n - 1, other, to);
 }
 
-function start()
+function reset()
 {
 	moves = []
 	legs = []
@@ -116,23 +119,18 @@ function start()
 	moveStack(stacks[0].length, 0, 2);
 
 	nextLeg();
-	resume();
 }
 
-function resume()
+function start()
 {
 	if (!timerID)
 		timerID = setInterval(animate, 50);
 }
-function pause()
+function stop()
 {
 	if (timerID)
 		clearInterval(timerID);
 	timerID = 0;
-}
-function stop()
-{
-	pause();
 }
 
 function makeStacks()
@@ -225,7 +223,7 @@ function init()
 	timerID = 0;
 
 	makePoles();
-	makeStacks();
+	reset();
 }
 
 window.onload = init;

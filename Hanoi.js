@@ -133,6 +133,17 @@ function stop()
 	timerID = 0;
 }
 
+function setNumber()
+{
+	nDisks = parseInt(document.getElementById("number").value);
+	reset();
+}
+
+function setSpeed()
+{
+	speed = parseFloat(document.getElementById("speed").value);
+}
+
 function makeStacks()
 {
 	// Todo: any number of disks -- use a loop
@@ -149,10 +160,9 @@ function makeStacks()
 
 	stacks = [[], [], []]
 
-	var width = 130;
-
 	var body = document.getElementById("body");
-	var nDisks = 12;
+
+	var width = 190;
 
 	for (var i = 0; i < nDisks && width > 20; i++)
 	{
@@ -176,7 +186,7 @@ function makePoles()
 	poles_mid.push(350);
 	poles_mid.push(550);
 	poles_top = 150;
-	poles_bot = poles_top + 230;
+	poles_bot = poles_top + 20 * 13;
 
 	var body = document.getElementById("body");
 
@@ -210,8 +220,8 @@ function makePoles()
 	var base = document.createElement("img");
 	base.style.position = "absolute";
 	base.style.height = "20px";
-	base.style.left = poles_mid[0] - 70 + "px";
-	base.style.width = poles_mid[2] - poles_mid[0] + 140 + "px";
+	base.style.left = poles_mid[0] - 100 + "px";
+	base.style.width = poles_mid[2] - poles_mid[0] + 200 + "px";
 	base.style.top = poles_bot + "px";
 	base.src = "disk.jpg";
 	body.appendChild(base);
@@ -221,10 +231,11 @@ function init()
 {
 	stacks = []
 	timerID = 0;
-	speed = 1;
 
 	makePoles();
-	reset();
+
+	setSpeed();
+	setNumber();
 }
 
 window.onload = init;

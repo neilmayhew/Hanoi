@@ -50,6 +50,8 @@ function nextMove()
 
 	var move = moves.shift();
 
+	window.status = moves.length + " moves remaining";
+
 	var disk = stacks[move.from].pop();
 	stacks[move.to].push(disk);
 

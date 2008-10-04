@@ -73,7 +73,7 @@ function nextMove()
 	// Move up
 	leg = new Object;
 	leg.element = disk;
-	leg.duration = 0.5;
+	leg.duration = 1.0 / speed / 3;
 	leg.end_x = poles_mid[move.from] - parseInt(disk.style.width) / 2;
 	leg.end_y = poles_top - 50;
 	legs.push(leg);
@@ -81,7 +81,7 @@ function nextMove()
 	// Move across
 	leg = new Object;
 	leg.element = disk;
-	leg.duration = 0.5;
+	leg.duration = 1.0 / speed / 3;
 	leg.end_x = poles_mid[move.to] - parseInt(disk.style.width) / 2;
 	leg.end_y = poles_top - 50;
 	legs.push(leg);
@@ -89,7 +89,7 @@ function nextMove()
 	// Move down
 	leg = new Object;
 	leg.element = disk;
-	leg.duration = 0.5;
+	leg.duration = 1.0 / speed / 3;
 	leg.end_x = poles_mid[move.to] - parseInt(disk.style.width) / 2;
 	leg.end_y = poles_bot - stacks[move.to].length * 20;
 	legs.push(leg);
@@ -221,6 +221,7 @@ function init()
 {
 	stacks = []
 	timerID = 0;
+	speed = 1;
 
 	makePoles();
 	reset();

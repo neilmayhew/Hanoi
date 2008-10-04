@@ -139,45 +139,24 @@ function makeStacks()
 
 	stacks = [[], [], []]
 
-	var width = 100;
+	var width = 130;
 
 	var body = document.getElementById("body");
+	var nDisks = 12;
 
-	disk3 = document.createElement("img");
-	body.appendChild(disk3);
-	stacks[0].push(disk3);
-	disk3.id = "disk3";
-	disk3.src = "disk.jpg";
-	disk3.style.position = "absolute";
-	disk3.style.width = width + "px";
-	disk3.style.height = 19 + "px";
-	disk3.style.left = Math.round(poles_mid[0] - width / 2) + "px";
-	disk3.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-	width -= 10;
-
-	disk2 = document.createElement("img");
-	body.appendChild(disk2);
-	stacks[0].push(disk2);
-	disk2.id = "disk2";
-	disk2.src = "disk.jpg";
-	disk2.style.position = "absolute";
-	disk2.style.width = width + "px";
-	disk2.style.height = 19 + "px";
-	disk2.style.left = Math.round(poles_mid[0] - width / 2) + "px";
-	disk2.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-	width -= 10;
-
-	disk1 = document.createElement("img");
-	body.appendChild(disk1);
-	stacks[0].push(disk1);
-	disk1.id = "disk1";
-	disk1.src = "disk.jpg";
-	disk1.style.position = "absolute";
-	disk1.style.width = width + "px";
-	disk1.style.height = 19 + "px";
-	disk1.style.left = Math.round(poles_mid[0] - width / 2) + "px";
-	disk1.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
-	width -= 10;
+	for (var i = 0; i < nDisks && width > 20; i++)
+	{
+		var disk = document.createElement("img");
+		body.appendChild(disk);
+		stacks[0].push(disk);
+		disk.src = "disk.jpg";
+		disk.style.position = "absolute";
+		disk.style.width = width + "px";
+		disk.style.height = 19 + "px";
+		disk.style.left = Math.round(poles_mid[0] - width / 2) + "px";
+		disk.style.top = Math.round(poles_bot - stacks[0].length * 20) + "px";
+		width -= 10;
+	}
 }
 
 function makePoles()
@@ -187,7 +166,7 @@ function makePoles()
 	poles_mid.push(350);
 	poles_mid.push(550);
 	poles_top = 150;
-	poles_bot = poles_top + 170;
+	poles_bot = poles_top + 230;
 
 	var body = document.getElementById("body");
 

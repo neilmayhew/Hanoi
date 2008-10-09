@@ -37,8 +37,12 @@ function animate()
 	if (t > 1.0)
 		t = 1.0;
 
-	var cur_x = leg.start_x * (1 - t) + leg.end_x * t;
-	var cur_y = leg.start_y * (1 - t) + leg.end_y * t;
+	var cur_x =     leg.start_x * (1 - t) * (1 - t) +
+				2 * leg.control_x * t * (1 - t) +
+				    leg.end_x * t * t;
+	var cur_y =     leg.start_y * (1 - t) * (1 - t) +
+				2 * leg.control_y * t * (1 - t) +
+				    leg.end_y * t * t;
 
 	leg.element.style.left = Math.round(cur_x) + "px";
 	leg.element.style.top  = Math.round(cur_y) + "px";
@@ -50,20 +54,16 @@ function animate()
 	}
 }
 
-function makeLeg(element, start_x, start_y, end_x, end_y)
+function makeLeg(element, start_x, start_y, end_x, end_y, control_x, control_y, duration)
 {
-	var pixelSpeed = 400.0 * speed; // pixels/sec
-
-	var duration_x = Math.abs(end_x - start_x) / pixelSpeed;
-	var duration_y = Math.abs(end_y - start_y) / pixelSpeed;
-	var duration = Math.max(duration_x, duration_y);
-
 	var leg = new Object;
 	leg.element = element;
 	leg.start_x = start_x;
 	leg.start_y = start_y;
 	leg.end_x = end_x;
 	leg.end_y = end_y;
+	leg.control_x = control_x;
+	leg.control_y = control_y;
 	leg.duration = duration;
 
 	return leg;
@@ -83,31 +83,55 @@ function nextMove()
 	var disk = stacks[move.from].pop();
 	stacks[move.to].push(disk);
 
+	var pixelSpeed = 400.0 * speed; // pixels/sec
+
 	var start_x;
 	var start_y;
 	var end_x;
 	var end_y;
+	var control_x;
+	var control_y;
+	var duration;
 
 	// Move up
 	start_x = parseInt(disk.style.left);
 	start_y = parseInt(disk.style.top);
 	end_x = poles_mid[move.from] - parseInt(disk.style.width) / 2;
-	end_y = poles_top - 50;
-	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y));
+	end_y = poles_top;
+	control_x = start_x;
+	control_y = start_y + 20;
+	duration = Math.abs(end_y - control_y) / pixelSpeed / 2;
+	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y, control_x, control_y, duration));
 
-	// Move across
+	// Move up and across
+	start_x = end_x;
+	start_y = end_y;
+	end_x = (poles_mid[move.from] + poles_mid[move.to]) / 2 - parseInt(disk.style.width) / 2;
+	end_y = poles_top - 100;
+	control_x = start_x;
+	control_y = end_y;
+	duration = Math.abs(control_y - start_y) / pixelSpeed / 2;
+	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y, control_x, control_y, duration));
+
+	// Move across and down
 	start_x = end_x;
 	start_y = end_y;
 	end_x = poles_mid[move.to] - parseInt(disk.style.width) / 2;
-	end_y = poles_top - 50;
-	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y));
+	end_y = poles_top;
+	control_x = end_x;
+	control_y = start_y;
+	duration = Math.abs(end_y - control_y) / pixelSpeed / 2;
+	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y, control_x, control_y, duration));
 
 	// Move down
 	start_x = end_x;
 	start_y = end_y;
 	end_x = poles_mid[move.to] - parseInt(disk.style.width) / 2;
 	end_y = poles_bot - stacks[move.to].length * 20;
-	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y));
+	control_x = end_x;
+	control_y = end_y - 20;
+	duration = Math.abs(control_y - start_y) / pixelSpeed / 2;
+	legs.push(makeLeg(disk, start_x, start_y, end_x, end_y, control_x, control_y, duration));
 }
 
 function moveStack(n, from, to)
@@ -205,7 +229,7 @@ function makePoles()
 	poles_mid.push(150);
 	poles_mid.push(350);
 	poles_mid.push(550);
-	poles_top = 150;
+	poles_top = 200;
 	poles_bot = poles_top + 20 * 13;
 
 	var body = document.getElementById("body");

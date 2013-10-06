@@ -4,8 +4,6 @@
  *	Animate the Towers of Hanoi game
  *
  *	Neil & Dominic Mayhew - 2006-09-11
- *
- *	$Id$
  */
 
 // This function returns the time in seconds since the program started

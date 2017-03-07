@@ -11,6 +11,7 @@ hanoi = (function()
 	// Persistent variables
 	var stacks, moves, legs, leg_start_time;
 	var timerID = 0;
+	var status = document.getElementById("status");
 
 	// This function returns the time in seconds since the program started
 	var base_time = 0;
@@ -76,11 +77,11 @@ hanoi = (function()
 	{
 		if (moves.length == 0)
 		{
-			window.status = "Finished";
+			status.textContent = "Finished";
 			return;
 		}
 
-		window.status = moves.length + " moves remaining";
+		status.textContent = moves.length + " moves remaining";
 
 		var move = moves.shift();
 		var disk = stacks[move.from].pop();
@@ -157,6 +158,8 @@ hanoi = (function()
 
 		makeStacks();
 		moveStack(stacks[0].length, 0, 2);
+
+		status.textContent = "";
 	}
 
 	var start = function()

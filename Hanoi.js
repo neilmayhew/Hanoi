@@ -60,17 +60,16 @@ hanoi = (function()
 
 	var makeLeg = function(element, start_x, start_y, end_x, end_y, control_x, control_y, duration)
 	{
-		var leg = new Object;
-		leg.element = element;
-		leg.start_x = start_x;
-		leg.start_y = start_y;
-		leg.end_x = end_x;
-		leg.end_y = end_y;
-		leg.control_x = control_x;
-		leg.control_y = control_y;
-		leg.duration = duration;
-
-		return leg;
+		return {
+			element: element,
+			start_x: start_x,
+			start_y: start_y,
+			end_x: end_x,
+			end_y: end_y,
+			control_x: control_x,
+			control_y: control_y,
+			duration: duration,
+		};
 	}
 
 	var nextMove = function()
@@ -145,10 +144,7 @@ hanoi = (function()
 		if (n - 1 > 0) moveStack(n - 1, from, other);
 
 		// Move a disk from => to;
-		move = new Object;
-		move.from = from;
-		move.to = to;
-		moves.push(move);
+		moves.push({from: from, to: to});
 
 		if (n - 1 > 0) moveStack(n - 1, other, to);
 	}

@@ -8,6 +8,10 @@
 
 hanoi = (function()
 {
+	// Persistent variables
+	var stacks, moves, legs, leg_start_time;
+	var timerID = 0;
+
 	// This function returns the time in seconds since the program started
 	var base_time = 0;
 	var getTime = function()
@@ -271,11 +275,7 @@ hanoi = (function()
 		body.appendChild(base);
 	}
 
-	var stacks, moves, legs, leg_start_time;
-	var timerID = 0;
-
 	makePoles();
-
 	setSpeed();
 	setNumber();
 

@@ -6,17 +6,16 @@
 				border: 1px solid;
 			}
 		</style>
-		<script src="Hanoi.js" type="text/javascript" language="JavaScript"></script>
 	</head>
 	<body id="body">
 		<h1>Towers of Hanoi</h1>
 		<p>
-			<input type="button" onclick="start()" value="Start"/>
-			<input type="button" onclick="stop()"  value="Stop"/>
-			<input type="button" onclick="reset()" value="Reset"/>
+			<input type="button" onclick="hanoi.start()" value="Start"/>
+			<input type="button" onclick="hanoi.stop()"  value="Stop"/>
+			<input type="button" onclick="hanoi.reset()" value="Reset"/>
 			<span>&#160;&#160;&#160;&#160;</span>
 			<label for="number">Disks:</label>
-			<select id="number" onchange="setNumber()">
+			<select id="number" onchange="hanoi.setNumber()">
 				<option value="3">3</option>
 				<option value="4">4</option>
 				<option value="5">5</option>
@@ -30,7 +29,7 @@
 			</select>
 			<span>&#160;&#160;&#160;&#160;</span>
 			<label for="speed">Speed:</label>
-			<select id="speed" onchange="setSpeed()">
+			<select id="speed" onchange="hanoi.setSpeed()">
 				<option value="0.25">0.25</option>
 				<option value="0.5">0.5</option>
 				<option value="1" selected="yes">1</option>
@@ -39,5 +38,6 @@
 				<option value="4">4</option>
 			</select>
 		</p>
+		<script src="Hanoi.js" type="text/javascript" language="JavaScript"></script>
 	</body>
 </html>
